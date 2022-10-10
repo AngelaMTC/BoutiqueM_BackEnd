@@ -27,7 +27,7 @@ const clothesSchema = new Schema({
         type: String
     },
     precio : {
-        type: int
+        type: Number
     }
 });
 

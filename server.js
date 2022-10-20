@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 /////////ROUTES
-app.use("/api", require("./server/routes/index"));
+// app.use("/api", require("./server/routes/index"));
 
 /////////CONNECTION TO MONGODB
 mongoose

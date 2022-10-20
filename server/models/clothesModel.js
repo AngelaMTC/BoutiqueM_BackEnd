@@ -1,21 +1,34 @@
 const mongoose = require("mongoose");
-const { Schema } = mongoose;
+const {Schema} = mongoose;
 
 const clothesSchema = new Schema({
-    gender: {
-        type: String,
-        //required: [true,'the name is required']
+
+    category: {
+        type: Schema.Types.ObjectId,
+        ref: 'nameCategory'
+    },
+    name: {
+        type: String
+    },
+    type: {
+        type: Schema.Types.ObjectId,
+        ref: 'typeClothe'
     },
     size: {
-        type: Number,
-        //required: [true,'the first last name is required']
+        type: String
     },
     color: {
-        type: String,
-    },
-    style: {
         type: String
+    },
+    serialNumber: {
+        type: String
+    },
+    photo: {
+        type: String
+    },
+    precio : {
+        type: Number
     }
 });
 
-module.exports = mongoose.model("user", userSchema);
+module.exports = mongoose.model("clothes", clothesSchema);

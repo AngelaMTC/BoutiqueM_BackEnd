@@ -1,4 +1,4 @@
-const typeClotheModel = require('../models/typeClotheModel')
+const typeClotheModel = require("../models/typeClotheModel");
 const express = require("express");
 const app = express();
 
@@ -15,7 +15,7 @@ app.get("/", async (req, res) => {
         estatus: "200",
         err: false,
         cont: {
-            typeClothe,
+          typeClothe,
         },
       });
     }

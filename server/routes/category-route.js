@@ -1,4 +1,4 @@
-const categoryModel = require('../models/nameCategoryModel')
+const categoryModel = require("../models/nameCategoryModel");
 const express = require("express");
 const app = express();
 

@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const app = express();
 
-////////INITIALIZATIONS
 require("./server/config/db");
 require("colors");
 
@@ -23,10 +22,8 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());
 
-/////////ROUTES
- app.use("/api", require("./server/routes/index"));
+app.use("/api", require("./server/routes/index"));
 
-/////////CONNECTION TO MONGODB
 mongoose
   .connect(process.env.URLDB, {})
   .then((resp) => {

@@ -35,6 +35,53 @@ app.get("/", async (req, res) => {
   }
 });
 
+app.get("/category", async (req, res) => {
+  const idCategory = req.query.idCategory;
+  const clotheAux = [];
+  const clothes = await clotheModel.aggregate([
+    {
+      $lookup: {
+        from: "namecategories",
+        localField: "category",
+        foreignField: "_id",
+        as: "category",
+      },
+    },
+    {
+      $lookup: {
+        from: "typeclothes",
+        localField: "type",
+        foreignField: "_id",
+        as: "type",
+      },
+    },
+  ]);
+
+  function getFilteredByKey(array, value) {
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].category[0]._id == value) {
+        clotheAux.push(array[i]);
+      }
+    }
+    return clotheAux;
+  }
+
+  const clotheFilter = getFilteredByKey(clothes, idCategory);
+
+  if (clothes.length <= 0) {
+    res.status(404).send({
+      estatus: "404",
+      err: true,
+    });
+  } else {
+    res.status(200).send({
+      estatus: "200",
+      err: false,
+      clotheFilter,
+    });
+  }
+});
+
 app.post("/", async (req, res) => {
   try {
     const clothe = new clotheModel(req.body);
@@ -91,7 +138,6 @@ app.put("/", async (req, res) => {
       return res.status(400).send({
         estatus: "400",
         err: true,
-        
       });
     }
     req.body._id = idClothe;
